@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<script src="http://150.89.233.9/js/jquery-2.2.4.min.js"></script>
+ <script src="https://maps.googleapis.com/maps/api/js?[鍵の記述]">
+<script type="text/javascript" src="js/gmap3/jquery.gmap3.js"></script>
+  <script>
+  function makeMap(lat, lng) {
+    var canvas = document.getElementById('map-canvas'); // 地図を表示する要素を取得
+
+    var latlng = new google.maps.LatLng(lat, lng);  // 中心の位置（緯度、経度）
+
+    var mapOptions = {  // マップのオプション
+        zoom: 17,
+        center: latlng,
+    };
+    var map = new google.maps.Map(canvas, mapOptions); //作成
+    return map;
+  }
+
+  //ページのロードが完了したら地図を読み込む
+  window.onload = function(){
+      makeMap(35.446806, 139.636163);
+  };
+  </script>
+  <style>
+   #map-canvas {
+     width: 600px;
+     height: 400px;
+   }
+  </style>
+</head>
+<body>
+  <div id="map-canvas">ここにマップが表示されます</div>
+</body>
+</html>
