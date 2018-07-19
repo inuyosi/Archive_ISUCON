@@ -68,25 +68,22 @@ void merge(status n[], int left, int mid, int right)
             tmp[iw].department = n[ir].department;
             tmp[iw++].number = n[ir++].number;
 	}
-printf("a\n");
-
     }
+
     while (il < mid) {
 	tmp[iw].department = n[il].department;
 	tmp[iw++].number = n[il++].number;
     }
-printf("b\n");
+
     while (ir < right) {
 	tmp[iw].department = n[ir].department;
 	tmp[iw++].number = n[ir++].number;
     }
-printf("c\n");
 
     for (int i=0; i<num; i++) {
 	n[left + i].department = tmp[i].department;
 	n[left + i].number = tmp[i].number;
     }
-printf("d%d%d\n",num,iw);
 
     delete[] tmp;
 
@@ -98,21 +95,15 @@ void merge_sort_sub(status n[], int left, int right)
     if (right - left <= 1) return;
 
     int mid = left + (right - left) / 2;
-	printf("2\n");
     merge_sort_sub(n, left, mid);
-	printf("3\n");
-
     merge_sort_sub(n, mid, right);
-	printf("4\n");
     merge(n, left, mid, right);
-	printf("5\n");
 
 }
 
 
 void merge_sort(status n[], int len)
 {
-	printf("1\n");
     merge_sort_sub(n, 0, len);
 }
 
@@ -125,7 +116,7 @@ int main()
 	inputdata(student, "n", 200);
 	inputdata(student, "q", 300);
 
-	shuffle(student, N);		// 配列をランダムにします
+//	shuffle(student, N);		// 配列をランダムにします
 
 	for (int i = 0;i < N;i++)		// 確認用
 		printf("%s%d ", student[i].department, student[i].number);
@@ -136,6 +127,8 @@ int main()
 
 	for (int i = 0;i < N;i++)		// 確認用
 		printf("%s%d ", student[i].department, student[i].number);
+
+	printf("\n");
 
 	return 0;
 }

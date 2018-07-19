@@ -75,7 +75,7 @@ int main()
 	inputdata(student, "n", 200);
 	inputdata(student, "q", 300);
 
-	shuffle(student, N);		// 配列をランダムにします
+//	shuffle(student, N);		// 配列をランダムにします
 
 	for (int i = 0;i < N;i++)		// 確認用
 		printf("%s%d ", student[i].department, student[i].number);
@@ -85,6 +85,8 @@ int main()
 
 	for (int i = 0;i < N;i++)		// 確認用
 		printf("%s%d ", student[i].department, student[i].number);
+
+	printf("\n");
 
 	return 0;
 }
