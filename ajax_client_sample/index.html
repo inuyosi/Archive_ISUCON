@@ -1,0 +1,140 @@
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <script
+			  src="https://code.jquery.com/jquery-2.2.4.min.js"
+			  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+			  crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="js/listing.js"></script>
+  </head>
+  <body>
+  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    検索項目
+  </button>
+ <div class="collapse" id="collapseExample">
+    <label>名前<input type="text" name="name" class="search"></label>
+    <label>名前(カナ)<input type="text" name="name_kana" class="search"></label>
+    <label>メール<input type="text" name="mail" class="search"></label>
+    <label>住所<input type="text" name="address1" class="search"></label>
+    <label>年齢<input type="number" name="age" class="search"></label>
+ </div>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create" >
+      レコードの作成
+    </button>
+    <div class="modal fade" id="create" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">新規レコードの作成</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label>名前</label>
+              <input type="text" name="name" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>名前（カナ）</label>
+              <input type="text" name="name_kana" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>性別</label>
+              <input type="text" name="gender" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>携帯電話</label>
+              <input type="text" name="phone" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>メール</label>
+              <input type="text" name="mail" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>郵便番号</label>
+              <input type="text" name="zipcode" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>住所1</label>
+              <input type="text" name="address1" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>住所2</label>
+              <input type="text" name="address2" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>住所3</label>
+              <input type="text" name="address3" class="form-control"  />
+            </div>
+            <div class="form-group">
+              <label>住所4</label>
+              <input type="text" name="address4" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>住所5</label>
+              <input type="text" name="address5" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label>年齢</label>
+              <input type="text" name="age" class="form-control" />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
+            <button type="button" class="btn btn-primary" >保存</button>
+          </div>
+        </div>
+      </div>
+    </div>
+<div >
+<nav aria-label="Page navigation example" class="pull-right">
+        <select name="per" class="form-control search" id="per-page">
+          <option value="10">10件</option>
+          <option value="20">20件</option>
+          <option value="40">40件</option>
+          <option value="80">80件</option>
+          <option value="160">160件</option>
+          <option value="320">320件</option>
+        </select>
+  <ul class="pagination">
+    <li>
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li><a href="#" name="page">1</a></li>
+    <li><a href="#" name="page">2</a></li>
+    <li><a href="#" name="page">3</a></li>
+    <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+</div>
+    <table class="table">
+      <thead class="alert alert-primary" role="alert">
+        <tr>
+          <th>#</th>
+          <th>名前</th>
+          <th>名前（カタカナ）</th>
+          <th>性別</th>
+          <th>携帯電話</th>
+          <th>メールアドレス</th>
+          <th>郵便番号</th>
+          <th>住所1</th>
+          <th>住所2</th>
+          <th>住所3</th>
+          <th>住所4</th>
+          <th>住所5</th>
+          <th>年齢</th>
+        </tr>
+      </thead>
+      <tbody id="data" >
+      </tbody>
+    </table>
+  </body>
+</html>
