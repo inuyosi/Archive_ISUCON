@@ -12,7 +12,7 @@ def main():
     '''imgs[0] <- first image, imgs[1] <- second image, ...'''
 
     # decide alpha values (weight for each image)
-    alphas = [0.2, 0.4, 0.3, 0.5]
+    alphas = [0.2, 0.3, 0.3, 0.2]
     '''alphas[0] <- for first image, alphas[1] <- for second image, ...'''
 
     # initialize result image matrix
