@@ -4,7 +4,13 @@ import matplotlib.pyplot as plt
 
 
 def contrast(imgs):  # absolute Laplacian value
-    return imgs
+    h,w,c = imgs[0].shape
+    n = len(imgs)
+    W = np.zeros((h,w,n))
+    for i in range(n):
+        gray = cv2.cvtColor(imgs[i],cv2.COLOR_BGR2GRAY)
+        W[:,:,i] = gray
+    return W
 
 
 def saturation(imgs):  # standard deviation of color (R,G,B)
@@ -19,7 +25,7 @@ def demoFeatures():
     img = cv2.imread('img/flash/ambient.jpg')
     f = contrast([img])
 
-    cv2.imshow('contrast', f)
+    cv2.imshow('contrast',f/255)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
