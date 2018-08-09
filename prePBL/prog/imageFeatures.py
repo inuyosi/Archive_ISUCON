@@ -14,6 +14,7 @@ def contrast(imgs):  # absolute Laplacian value
 
 
 def saturation(imgs):  # standard deviation of color (R,G,B)
+    
     return imgs
 
 
@@ -23,6 +24,10 @@ def exposure(imgs):  # middle value is the best of pixel values (gaussian weight
 
 def demoFeatures():
     img = cv2.imread('img/flash/ambient.jpg')
+    print(img)
+    if (img == None).any():
+        print("IOerror")
+    #    return
     f = contrast([img])
 
     cv2.imshow('contrast',f/255)
