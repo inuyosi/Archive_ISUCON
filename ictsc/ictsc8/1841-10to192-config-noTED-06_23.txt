@@ -1,0 +1,47 @@
+ena
+conf t
+hostname 10-to-192
+!         
+ip dhcp pool hoge
+   network 192.168.0.0 255.255.255.0
+   default-router 192.168.0.1 
+!
+crypto isakmp policy 1
+ encr 3des
+ authentication pre-share
+ group 2
+ lifetime 43200
+exit
+crypto isakmp key cisco address 0.0.0.0 0.0.0.0
+crypto isakmp keepalive 30 periodic
+!
+crypto ipsec transform-set T-IPSEC esp-3des esp-md5-hmac 
+exit
+!
+crypto map M-IPSEC 1 ipsec-isakmp 
+ set peer 172.16.0.1 
+ set transform-set T-IPSEC 
+ match address 101
+exit
+!q
+interface FastEthernet0/0
+ ip address 192.168.0.1 255.255.255.0
+no shut
+exit
+!
+interface FastEthernet0/1
+ ip address dhcp
+no shut
+ crypto map M-IPSEC
+exit
+!
+ip route 0.0.0.0 0.0.0.0 fastEthernet 0/1
+!
+router ospf 1
+ network 10.0.0.0 0.0.0.255 area 0
+ network 192.168.0.0 0.0.0.255 area 0
+exit
+access-list 101 permit ip 192.168.0.0 0.0.0.255 172.16.0.0 0.0.0.255
+access-list 101 permit ip 192.168.0.0 0.0.0.255 150.89.233.0 0.0.0.255
+!
+end

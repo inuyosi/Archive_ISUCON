@@ -1,0 +1,31 @@
+ena
+conf t
+hostname 150-to-172
+!-- Phase1 --
+intrface Fa0/0
+no crypto map M-IPSEC
+exit
+no crypto map M-IPSEC 1 ipsec-isakmp
+no crypto ipsec transform-set T-IPSEC esp-3des esp-md5-hmac 
+no crypto isakmp key cisco address 10.0.0.2
+crypto isakmp key cisco address 0.0.0.0 0.0.0.0
+crypto isakmp keepalive 30 periodic
+crypto ipsec transform-set T-IPSEC esp-3des esp-md5-hmac 
+exit
+
+!-- Phase2 --
+crypto map M-IPSEC 1 ipsec-isakmp
+ set peer 172.16.0.2
+ set peer 10.0.0.2
+ set transform-set T-IPSEC
+ match address 101
+exit
+interface FastEthernet0/0
+crypto map M-IPSEC
+exit
+!
+
+!-- ping --
+access-list 101 permit ip 150.89.233.0 0.0.0.255 192.168.0.0 0.0.0.255
+ip route 192.168.0.0 255.255.255.0 172.16.0.2
+!
