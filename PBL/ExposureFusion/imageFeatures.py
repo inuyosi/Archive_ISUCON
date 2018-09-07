@@ -101,7 +101,7 @@ def demoFeatures():
     testFeature = 0
 
     if testFeature == 0:
-        img = cv2.imread('img/house/C.jpg')/255
+        img = cv2.imread('img/flash/ambient.jpg')/255
         f = contrast([img])
         wname = 'contrast'
         imgNM = 'res/con_img.png'
