@@ -41,7 +41,7 @@ public class Shoter : MonoBehaviour {
 					);
 				
 				// ボール生成時に速度を持たせる 
-				ini_ball.rigidbody.velocity = ball_vec;
+				ini_ball.GetComponent<Rigidbody>().velocity = ball_vec;
 
 				if(count >= 100){
 					Application.LoadLevel("ballgame");

@@ -24,7 +24,7 @@ public class Refrect : MonoBehaviour {
 				);
 			
 			// ボール生成時に速度を持たせる 
-			o.rigidbody.velocity = ball_vec;
+			o.GetComponent<Rigidbody>().velocity = ball_vec;
 			
 	//	}
 		
