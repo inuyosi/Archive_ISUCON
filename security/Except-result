@@ -1,0 +1,7 @@
+m1m18a07@o-rmtx02:~/java$ java Except -1
+エラー： ArgException
+m1m18a07@o-rmtx02:~/java$ java Except 50
+合計=1275
+m1m18a07@o-rmtx02:~/java$ java Except 101
+エラー： ArgException
+m1m18a07@o-rmtx02:~/java$
