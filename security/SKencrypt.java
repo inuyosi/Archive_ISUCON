@@ -4,7 +4,7 @@ import java.security.spec.*;
 import javax.crypto.*;
 import javax.crypto.spec.*;
 
-public class SKdecrypt implements Serializable{
+public class SKencrypt implements Serializable{
  public static void main(String args[]){
   	try{
 	FileInputStream inFile = new FileInputStream(args[0]);
@@ -13,19 +13,24 @@ public class SKdecrypt implements Serializable{
 	SecretKey skey = (SecretKey) skeyFile.readObject();
 	String algorithm = skey.getAlgorithm();
 	byte[] buf = new byte[2048];
-	byte[] gbuf = new byte[2048];
+	byte[] gbuf;
+	byte[] tbuf = new byte[8];
 	int len;
+	keyFile.close();
 	Cipher cipher = Cipher.getInstance(algorithm+"/"+args[3]+"/PKCS5Padding");
-	cipher.init(Cipher.DECRYPT_MODE,skey);
-	FileOutputStream encrypted = new FileOutputStream(args[2]);
-
-	while(( len = inFile.read(buf)) != -1){
-		gbuf = cipher.update(buf,0,len);
+        System.out.println(algorithm+"/"+args[3]+"/PKCS5Padding");
+	cipher.init(Cipher.ENCRYPT_MODE,skey);
+	
+        FileOutputStream encrypted = new FileOutputStream(args[2]);
+	while(( len = inFile.read(tbuf)) != -1){
+		gbuf = cipher.update(tbuf,0,len);
 		encrypted.write(gbuf);
 	}
 	gbuf = cipher.doFinal();
+	if(gbuf != null){
+		encrypted.write(gbuf);
+	}
 	inFile.close();
-	keyFile.close();
 	encrypted.close();
 	}
 	catch (ClassNotFoundException e){
