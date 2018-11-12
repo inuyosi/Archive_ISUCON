@@ -30,4 +30,4 @@ for(k=1:1:4000)
         y_hat =[zeta*theta_hat y_hat];
     endif
 endfor
-plot(t2(:,1:4000),y_hat(4000:-1:1),"linewidth",3, t(1:2000),y2(1:2000,1),"linewidth",5);
+plot(t2(:,1:4000),y_hat(4000:-1:1), t(1:2000),y2(1:2000,1));
