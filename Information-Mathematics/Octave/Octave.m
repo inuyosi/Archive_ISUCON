@@ -8,11 +8,11 @@ for k=1:1:1999 %データ数分だけループ
     else x2=[y2(k-1,1) y2(k-2,1) y2(k,2) y2(k-1,2)];
     endif
     if(k==1)
-    X2=x2';
-    else X2=[X2 x2']; % θ計算用の行列X2を作る
+    X2=x2'; % '
+    else X2=[X2 x2']; % θ計算用の行列X2を作る'
     endif
 endfor
-theta_hat = inv(X2*X2')*X2*y2(1:1999,1); % θを一括計算
+theta_hat = inv(X2*X2')*X2*y2(1:1999,1); % θを一括計算'
 for(k=1:1:4000)
     if (k>2)
         u2 = u1;
