@@ -1,4 +1,4 @@
-load prob09.mat y2 % 観測データ
+load 7prob.mat y2 % 観測データ
 t=linspace(0,100,2001); %観測値グラフ描画用時間ステップ
 t2=linspace(0,200,4001);%推定値グラフ描画用時間ステップ
 

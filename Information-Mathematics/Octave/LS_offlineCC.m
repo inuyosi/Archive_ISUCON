@@ -1,14 +1,14 @@
-%ƒIƒtƒ‰ƒCƒ“Å¬ƒjæ–@‚É‚æ‚éƒpƒ‰ƒ[ƒ^„’è
+%ã‚ªãƒ•ãƒ©ã‚¤ãƒ³æœ€å°ãƒ‹ä¹—æ³•ã«ã‚ˆã‚‹ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿æ¨å®š
 %format long
-load 1prob.mat y2 % ŠÏ‘ªƒf[ƒ^
+load 1prob.mat y2 % è¦³æ¸¬ãƒ‡ãƒ¼ã‚¿
 period=20
 segment=period/1;
 iteration=period/segment
-t=linspace(0,100,2001);            %ŠÏ‘ª’lƒOƒ‰ƒt•`‰æ—pŠÔƒXƒeƒbƒv
-t2=linspace(0,200,4001);          %„’è’lƒOƒ‰ƒt•`‰æ—pŠÔƒXƒeƒbƒv
+t=linspace(0,100,2001);            %è¦³æ¸¬å€¤ã‚°ãƒ©ãƒ•æç”»ç”¨æ™‚é–“ã‚¹ãƒ†ãƒƒãƒ—
+t2=linspace(0,200,4001);          %æ¨å®šå€¤ã‚°ãƒ©ãƒ•æç”»ç”¨æ™‚é–“ã‚¹ãƒ†ãƒƒãƒ—
 
 for l=1:1:iteration
-  for k=1:1:segment %ƒf[ƒ^”•ª‚¾‚¯ƒ‹[ƒv
+  for k=1:1:segment %ãƒ‡ãƒ¼ã‚¿æ•°åˆ†ã ã‘ãƒ«ãƒ¼ãƒ—
            if((segment*(1-1)+k)==1) x2=[0 0 1 0];
            elseif((segment*(1-1)+k)==2) x2=[y2(k-1,1) 0 0 1];
            else x2=[y2(k-1,1) y2(k-2,1) y2(k,2) y2(k-1,2)];
@@ -16,7 +16,7 @@ for l=1:1:iteration
 
           if(k==1)
            X2=x2';
-           else X2=[X2 x2']; % ƒÆ‚ğŒvZ‚·‚é‚½‚ß‚Ìs—ñX2‚ğì‚é
+           else X2=[X2 x2']; % Î¸ã‚’è¨ˆç®—ã™ã‚‹ãŸã‚ã®è¡Œåˆ—X2ã‚’ä½œã‚‹
           endif
   endfor
   if(l==1) theta_hat = inv(X2*X2')*X2*y2((l-1)*segment+1:(l-1)*segment+segment,1);
@@ -34,7 +34,7 @@ for(k=1:1:4000)
           else
            zeta = [y_hat(1) y_hat(2) 0 0];
           endif
-         y_hat=[zeta*theta_hat y_hat];           %ƒOƒ‰ƒt•`‰æ—p„’èo—Íƒf[ƒ^‹L˜^
+         y_hat=[zeta*theta_hat y_hat];           %ã‚°ãƒ©ãƒ•æç”»ç”¨æ¨å®šå‡ºåŠ›ãƒ‡ãƒ¼ã‚¿è¨˜éŒ²
         elseif k==1
          u1=1;
          zeta = [0 0 u1 0];
@@ -43,9 +43,9 @@ for(k=1:1:4000)
          zeta = [0 0 0 u1];
          y_hat =[zeta*theta_hat y_hat];
         endif
-            %ÀÛ‚Ìo—Í‚ÍŠÏ‘ª’ly2(1000ŒÂ)
+            %å®Ÿéš›ã®å‡ºåŠ›ã¯è¦³æ¸¬å€¤y2(1000å€‹)
 endfor
         plot(t(1:period),y2(1:period,1),"linewidth",5,t2(:,1:4000),y_hat(4000:-1:1),"linewidth",3);
 %plot(t2(:,1:4000),y_hat(4000:-1:1),"linewidth",3);
-       %^‚ÌƒVƒXƒeƒ€o—Í‚Æ„’èo—Í‚Æ‚ğ”äŠr
+       %çœŸã®ã‚·ã‚¹ãƒ†ãƒ å‡ºåŠ›ã¨æ¨å®šå‡ºåŠ›ã¨ã‚’æ¯”è¼ƒ
 
