@@ -17,38 +17,20 @@ public class RSAdecrypt implements Serializable{
 	int len;
 	keyFile.close();
 	Cipher cipher = Cipher.getInstance("RSA");
-	cipher.init(Cipher.DECRYPT_MODE,skey);	
-    FileOutputStream encrypted = new FileOutputStream(args[2]);
+	cipher.init(Cipher.DECRYPT_MODE,skey);
+    FileOutputStream decrypted = new FileOutputStream(args[2]);
 	while(( len = inFile.read(tbuf)) != -1){
 		gbuf = cipher.update(tbuf,0,len);
-		//encrypted.write(gbuf);
+		decrypted.write(gbuf);
 	}
 	gbuf = cipher.doFinal();
 	if(gbuf != null){
-		encrypted.write(gbuf);
+		decrypted.write(gbuf);
 	}
 	inFile.close();
-	encrypted.close();
+	decrypted.close();
 	}
-	catch (ClassNotFoundException e){
-		System.err.println(e.getMessage());
-		}
-	catch (NoSuchAlgorithmException e){
-		System.err.println(e.getMessage());
-		}
-	catch (IOException e){
-		System.err.println(e.getMessage());
-		}
-	catch (NoSuchPaddingException e){
-		System.err.println(e.getMessage());
-		}
-	catch (InvalidKeyException e){
-		System.err.println(e.getMessage());
-		}
-	catch (IllegalBlockSizeException e){
-		System.err.println(e.getMessage());
-		}
-	catch (BadPaddingException e) {
+	catch (Exception e){
 		System.err.println(e.getMessage());
 		}
  }
