@@ -2,7 +2,7 @@
 %format long
 load 7prob_N.mat y2 % 観測データ
 %load 7prob.mat y2 % 観測データ
-period=20
+period=200
 segment=period/1;
 iteration=period/segment
 %t=linspace(0,100,2001);            %観測値グラフ描画用時間ステップ
