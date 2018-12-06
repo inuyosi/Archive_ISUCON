@@ -1,4 +1,0 @@
-Java VM はWindows、UNIXなどのOSやコンピュータ機種の違いを吸収し
-afdsaffa
-dfafsaf
-fafdsa
