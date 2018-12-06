@@ -1,9 +1,12 @@
 %オフライン最小ニ乗法によるパラメータ推定
 %format long
 load 7prob_N.mat y2 % 観測データ
-period=20
+%load 7prob.mat y2 % 観測データ
+period=2000
 segment=period/1;
 iteration=period/segment
+%t=linspace(0,100,2001);            %観測値グラフ描画用時間ステップ
+%t2=linspace(0,200,4001);          %推定値グラフ描画用時間ステップ
 t=linspace(0,100,2001);            %観測値グラフ描画用時間ステップ
 t2=linspace(0,200,4001);          %推定値グラフ描画用時間ステップ
 
@@ -24,6 +27,7 @@ for l=1:1:iteration
   endif
 endfor                         
   theta_hat ./= iteration
+  
 
 for(k=1:1:4000)
         if k>2
@@ -45,5 +49,7 @@ for(k=1:1:4000)
         endif
             %実際の出力は観測値y2(1000個)
 endfor
-        plot(t(1:period),y2(1:period,1),"linewidth",5,t2(:,1:4000),y_hat(4000:-1:1),"linewidth",3);
+%        plot(t(1:period),y2(1:period,1),"linewidth",5,t2(:,1:4000),y_hat(4000:-1:1),"linewidth",3);
+%        plot(t2(:,1:4000),y_hat(4000:-1:1),"linewidth",3);
+       %真のシステム出力と推定出力とを比較
 

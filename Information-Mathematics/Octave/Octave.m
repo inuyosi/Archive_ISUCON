@@ -8,12 +8,8 @@ for k=1:1:datasize %データ数分だけループ
     elseif (k==2) x2=[y2(k-1,1) 0 0 y2(k-1,2)];
     else x2=[y2(k-1,1) y2(k-2,1) y2(k,2) y2(k-1,2)];
     endif
-#   if(k==1) x2=[0 0 y2(k,1) 0];
-#   elseif (k==2) x2=[y2(k-1,1) 0 0 y2(k-1,1)];
-#   else x2=[y2(k-1,1) y2(k-2,1) y2(k,1) y2(k-1,1)];
-#    endif
     if(k==1)
-    X2=x2'; % 
+    X2=x2'; 
     else X2=[X2 x2']; % θ計算用の行列X2を作る
     endif
 endfor
@@ -36,5 +32,4 @@ for(k=1:1:4000)
     endif
 endfor
 y2(:,1);
-#plot(y2(1:2000,1));
 plot(t2(:,1:4000),y_hat(4000:-1:1), t(1:2000),y2(1:2000,1));
