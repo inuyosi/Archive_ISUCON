@@ -11,10 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- BootstrapのJS読み込み -->
     <script src="http://cdn.honokak.osaka/honoka/4.3.1/js/bootstrap.min.js"></script>
-    <style type="text/css">
-      table, td, th{ border: 1px solid black;}
-    </style>  
-  </head>
+</head>
   <body>
  <!-- Navbar
   ================================================== -->
@@ -46,47 +43,20 @@
           </div>
         </div>
       </section>
-      {% autoescape false %}
-      {{ content }}
-      {% endautoescape %}
-{% if problem %}
-          <!-- Forms
-  ================================================== -->
+    <!-- Headings -->
+
   <section class="bs-docs-section">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="page-header">
-            <h1 id="forms">解答 Forms(仮)</h1>
-            <hr>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="bs-component">
+                    {% autoescape false %}
+                    {{ text }}
+                    {% endautoescape %} 
+    
+            </div><!-- /example -->
           </div>
         </div>
-      </div>  
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="bs-component">
-            <form method="post">
-              <fieldset>
-                <div class="form-group">
-                  <label for="exampleSelect1">チーム選択</label>
-                  <select class="form-control" id="exampleSelect1" name="test1"> 
-                    <option>チーム選択をする</option>
-                    <option>NDYDAS</option>
-                    <option>:open_mouse:</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="exampleTextarea">解答記述</label>
-                  <textarea class="form-control" id="exampleTextarea" rows="3" name="test3"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">送信</button>
-              </fieldset>
-            </form>
-          </div>
-        </div>
-        {% else %}
-        {% autoescape false %}
-        {{ problem_parsentage }}
-        {% endautoescape %}
-        {% endif %} 
+      </section>
+    
   </body>
 </html>
