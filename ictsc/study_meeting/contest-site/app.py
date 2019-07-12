@@ -7,7 +7,7 @@ import os
 
 app = Flask(__name__)
 md = markdown.Markdown(extensions=['tables'])
-name_list =["NADYDS","open_mouth"]
+name_list =["NADYDS","open_mouth","all_team"]
 problem_flag = False
 answer_flag = False
 
@@ -32,9 +32,10 @@ def problem():
         for i in list(path.glob("*.md")) :
             if problem_flag :
                 data = str(i).replace("static/","").replace(".md","")
+                print (data)
                 content += ("- ["+ data.replace("problem/"+ name +"/","") + \
                            "](http://150.89.233.27/"+ data +")\n" )
-
+    
     for key in post_data :
         if not key == 'default' :
             problem_parsentage += "- [" + key + "](http://150.89.233.27/problem/" + \
@@ -57,8 +58,12 @@ def problem_name(team_name,problem_name):
         try:
             open_file = open("static/problem/" + team_name + "/"+ problem_name + ".md","r")
             content = open_file.read()
-            result = render_template('problem.html',content=md.convert(content),\
-                    problem=problem_name)
+            if team_name == "all_team" :
+                result = render_template('anyteam-problem.html',content=md.convert(content),\
+                         problem=problem_name)   
+            else :
+                result = render_template('problem.html',content=md.convert(content),\
+                         problem=problem_name)   
             open_file.close()
         except IOError:
             open_file = open("static/404.md","r")
@@ -71,10 +76,16 @@ def problem_name(team_name,problem_name):
 @app.route('/problem/<team_name>/<problem_name>',methods=["POST"])
 def problem_post(team_name,problem_name):
     res3 = request.form['test3']
-    if not problem_name in post_data : 
-        post_data[problem_name] = copy.deepcopy(post_data["default"])
-    post_data[problem_name]['team-name'] = team_name
-    post_data[problem_name]['comment'] = str(res3.replace('\r',''))
+    if team_name == "all_team" :
+        res1 = request.form['test1']
+        post_name = problem_name +"_" + res1
+    else :
+        res1 = team_name
+        post_name = problem_name
+    if not post_name in post_data : 
+        post_data[post_name] = copy.deepcopy(post_data["default"])
+    post_data[post_name]['team-name'] = res1
+    post_data[post_name]['comment'] = str(res3.replace('\r',''))
     try:
         open_file = open("static/problem/"+ team_name + "/" + problem_name + ".md","r")
         result = render_template('index.html',text="Send OK")
@@ -91,19 +102,13 @@ def problem_check(problem_name):
         open_file = open("static/404.md","r")
         result = render_template('index.html',text=md.convert(open_file.read()))
         open_file.close()
-    print(result)
     return result
 
 @app.route('/problem/<problem_name>/check',methods=["POST"])
 def parsentage_post(problem_name):
     res1 = request.form['test1']
     post_data[problem_name]['parsentage'] = res1
-    try:
-        open_file = open("static/problem/"+ problem_name + ".md","r")
-        result = render_template('index.html',text="Send OK")
-        open_file.close()
-    except IOError:
-        result = render_template('index.html',text="NOT file")
+    result = render_template('index.html',text="Send OK")
     return result
 
 @app.route('/change',methods=["GET"])
