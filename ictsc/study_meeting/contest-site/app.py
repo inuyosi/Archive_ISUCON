@@ -47,9 +47,14 @@ def problem():
 
 @app.route('/answer')
 def answer():
+    path = Path("static/answer/")
     content = "## 解説一覧\n"
     if answer_flag :
-        content += "b"
+        for i in list(path.glob("*.pdf")) :
+            if problem_flag :
+                data = str(i)
+                content += ("- ["+ data.replace("static/answer/","").replace(".pdf","") + \
+                           "](http://150.89.233.27/"+ data +")\n" )
     result = render_template('index.html',text=md.convert(content))
     return result
 
