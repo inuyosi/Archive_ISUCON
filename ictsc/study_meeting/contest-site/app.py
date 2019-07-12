@@ -60,12 +60,13 @@ def answer():
 
 @app.route('/problem/<team_name>/<problem_name>',methods=["GET"])
 def problem_name(team_name,problem_name):
+    if not problem_name == "Infrastructure" :
         try:
             open_file = open("static/problem/" + team_name + "/"+ problem_name + ".md","r")
             content = open_file.read()
             if team_name == "all_team" :
                 result = render_template('anyteam-problem.html',content=md.convert(content),\
-                         problem=problem_name)   
+                         problem=problem_name)
             else :
                 result = render_template('problem.html',content=md.convert(content),\
                          problem=problem_name)   
@@ -75,12 +76,19 @@ def problem_name(team_name,problem_name):
             content = open_file.read()
             result = render_template('index.html',text=md.convert(content))
             open_file.close()
-#   return result
-        return result
+    else :
+        result = render_template("Infrastructure.html")
+    return result
 
 @app.route('/problem/<team_name>/<problem_name>',methods=["POST"])
 def problem_post(team_name,problem_name):
-    res3 = request.form['test3']
+    if problem_name == "Infrastructure" :
+        res3  = ""
+        for i in range(20) :
+            number = i + 2
+            res3 += request.form['test'+str(number)] 
+    else :
+        res3 = request.form['test3']
     if team_name == "all_team" :
         res1 = request.form['test1']
         post_name = problem_name +"_" + res1
