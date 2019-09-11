@@ -7,7 +7,8 @@ import os
 
 app = Flask(__name__)
 md = markdown.Markdown(extensions=['tables'])
-name_list =["NADYDS","open_mouth","all_team"]
+name_list =["all_team"]
+ip_address = "127.0.0.1" #任意のIPアドレスに変更
 problem_flag = False
 answer_flag = False
 
@@ -34,11 +35,11 @@ def problem():
                 data = str(i).replace("static/","").replace(".md","")
                 print (data)
                 content += ("- ["+ data.replace("problem/"+ name +"/","") + \
-                           "](http://150.89.233.27/"+ data +")\n" )
+                           "](http://" + ip_address +"/"+ data +")\n" )
     
     for key in post_data :
         if not key == 'default' :
-            problem_parsentage += "- [" + key + "](http://150.89.233.27/problem/" + \
+            problem_parsentage += "- [" + key + "](http://"+ ip_address +"/problem/" + \
                                 key +"/check) " + str(post_data[key]["parsentage"]) + \
                                  "% / 100%\n"
     result = render_template('problem.html',content=md.convert(content),\
@@ -54,7 +55,7 @@ def answer():
             if problem_flag :
                 data = str(i)
                 content += ("- ["+ data.replace("static/answer/","").replace(".pdf","") + \
-                           "](http://150.89.233.27/"+ data +")\n" )
+                           "](http://"+ ip_address +"/"+ data +")\n" )
     result = render_template('index.html',text=md.convert(content))
     return result
 
