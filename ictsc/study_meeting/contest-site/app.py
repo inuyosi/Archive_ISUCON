@@ -8,7 +8,7 @@ import os
 app = Flask(__name__)
 md = markdown.Markdown(extensions=['tables'])
 name_list =["all_team"]
-ip_address = "127.0.0.1" #任意のIPアドレスに変更
+ip_address = "150.89.233.27" #任意のIPアドレスに変更
 problem_flag = False
 answer_flag = False
 
