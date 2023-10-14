@@ -17,6 +17,8 @@ long_query_time = 0
 | ログ再生成 | sudo mysqladmin flush-logs |  comments は対象テーブル |
 
 ---
+|  やりたいこと  |     コマンド      | 備考 |
+| --- | ----------- | ------- |
 | データベース確認    | SHOW DATABASES; |   python |
 | テーブル指定    | USE isuconp |     ruby |
 | 対象テーブルの確認 | SHOW CREATE TABLE comments\G |  comments は対象テーブル |
