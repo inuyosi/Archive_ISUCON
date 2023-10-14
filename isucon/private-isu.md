@@ -22,8 +22,8 @@ sudo nano /etc/nginx/nginx.conf
 ...
 ```
 
-- apply/restart:
-`sudo systemctl restart nginx`
+- apply(reload):
+`sudo systemctl reload nginx`
 
 - after: `{"time":"2023-10-14T20:59:07+09:00","host":"126.208.117.147","port":57417,"method":"GET","uri":"/image/10001.png","status":"200","body_bytes":"491313","referer":"http://35.74.241.117/posts/10001","ua":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36 Edg/117.0.2045.60","request_time":"0.019","response_time":"0.000"}`
 
