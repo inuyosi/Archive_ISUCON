@@ -455,6 +455,9 @@ export default function () {
 ```
 
 - その他コードは別に保存
+```
+ k6 run k6-scenario/integrated.js
+```
 
 #### alp check
 ```
