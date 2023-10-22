@@ -359,3 +359,97 @@ Count: 55737  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), 0users@0hosts
 Count: 55728  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), 0users@0hosts
   administrator command: Prepare
 ```
+
+#### dstat
+apt update -y && apt install dstat
+```
+$ dstat --cpu
+--total-cpu-usage--
+usr sys idl wai stl
+  9   2  89   0   0
+  0   0 100   0   0
+  0   0 100   0   0                                                                                                          0   0 100   0   0
+  0   0 100   0   0
+  0   0 100   0   0
+  0   0 100   0   0
+ 30   6  64   0   0
+ 50   6  44   0   0
+```
+
+#### top確認
+```
+top - 20:06:02 up 16 min,  3 users,  load average: 0.55, 0.37, 0.20
+Tasks: 113 total,   2 running, 111 sleeping,   0 stopped,   0 zombie
+%Cpu(s): 47.8 us,  6.3 sy,  0.0 ni, 45.7 id,  0.0 wa,  0.0 hi,  0.2 si,  0.0 st
+MiB Mem :   3827.7 total,   2105.9 free,    659.0 used,   1062.8 buff/cache
+MiB Swap:      0.0 total,      0.0 free,      0.0 used.   2927.3 avail Mem
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND                                                           694 isucon    20   0  221808  74136   9984 R  62.3   1.9   2:24.24 ruby
+    595 mysql     20   0 1784712 421888  36224 S  46.0  10.8   1:46.15 mysqld
+    376 memcache  20   0  413424   7424   3712 S   0.3   0.2   0:00.57 memcached
+    460 www-data  20   0   55844   6004   4096 S   0.3   0.2   0:00.48 nginx
+   1624 ubuntu    20   0   10892   3840   3200 R   0.3   0.1   0:00.01 top
+      1 root      20   0  100688  11516   8316 S   0.0   0.3   0:02.18 systemd
+      2 root      20   0       0      0      0 S   0.0   0.0   0:00.00 kthreadd
+      3 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 rcu_gp
+      4 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 rcu_par_gp
+      5 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 slub_flushwq
+      6 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 netns
+      8 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/0:0H-events_highpri
+     10 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 mm_percpu_wq
+     11 root      20   0       0      0      0 I   0.0   0.0   0:00.00 rcu_tasks_rude_kthread
+```
+
+#### unicornの修正(Rubyの場合)
+- 普通はCPUの2倍の数値にする。
+```
+$ sudo cat /home/isucon/private_isu/webapp/ruby/unicorn_config.rb
+worker_processes 4 #CPUが2個の場合
+preload_app true
+listen "0.0.0.0:8080"
+```
+
+#### install k6
+- https://k6.io/docs/get-started/installation/
+```
+sudo gpg -k
+sudo gpg --no-default-keyring --keyring /usr/share/keyrings/k6-archive-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C5AD17C747E3415A3642D57D77C6C491D6AC1D69
+echo "deb [signed-by=/usr/share/keyrings/k6-archive-keyring.gpg] https://dl.k6.io/deb stable main" | sudo tee /etc/apt/sources.list.d/k6.list
+sudo apt-get update
+sudo apt-get install k6
+```
+#### create senario for k6
+- ab.js
+```
+import http from "k6/http";
+
+const BASE_URL = "http://localhost";
+
+export default function () {
+    http.get(`${BASE_URL}/`);
+}
+```
+- config.js
+```
+const BASE_URL = "http://localhost";
+
+export function url(path) {
+    return `${BASE_URL}${path}`;
+}
+```
+- initialize.js
+```
+import http from "k6/http";
+
+import { sleep } from "k6";
+
+import { url } from "./config.js";
+
+export default function () {
+    http.get(url("/initialize"), {
+        timeout: "10s",
+    });
+
+    sleep(1);
+}
+```
