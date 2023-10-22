@@ -23,7 +23,7 @@ export default function () {
         const token = doc.find('input[name="csrf_token"]').first().attr("value");
         const post_id = doc.find('input[name="post_id"]').first().attr("value");
 
-        const comment_res = http.post(url("/login"), {
+        const comment_res = http.post(url("/comment"), {
                 post_id: post_id,
                 csrf_token: token,
                 comment: "Hello k6!",
