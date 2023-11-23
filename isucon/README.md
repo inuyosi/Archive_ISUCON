@@ -1,7 +1,7 @@
 - init.sh
   - 諸々の解析ツールinstall用シェル
 
-- k6-senario
+- k6-senario/
   - 負荷計測ツール
     - プログラムを修正して色々見る
 
