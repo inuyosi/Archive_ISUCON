@@ -1,5 +1,5 @@
 - init.sh
-  - 諸々の解析ツールのinstall用シェル
+  - 諸々の解析ツールinstall用シェル
 
 - alp_check.sh
   - nginxのアクセスログの解析
