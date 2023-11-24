@@ -1,0 +1,80 @@
+Your MySQL connection id is 42
+Server version: 8.0.35-0ubuntu0.22.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use isuconp;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_isuconp |
++-------------------+
+| comments          |
+| posts             |
+| users             |
++-------------------+
+3 rows in set (0.00 sec)
+
+
+mysql> show create table comments\G
+*************************** 1. row ***************************
+       Table: comments
+Create Table: CREATE TABLE `comments` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `post_id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `comment` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `psot_id_idx` (`post_id`,`created_at` DESC),
+  KEY `idx_user_id` (`user_id`),
+  FULLTEXT KEY `comments_full_idx` (`comment`) /*!50100 WITH PARSER `ngram` */ 
+) ENGINE=InnoDB AUTO_INCREMENT=107536 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+1 row in set (0.00 sec)
+
+mysql> show create table posts\G
+*************************** 1. row ***************************
+       Table: posts
+Create Table: CREATE TABLE `posts` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `mime` varchar(64) NOT NULL,
+  `imgdata` mediumblob NOT NULL,
+  `body` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `posts_order_idx` (`created_at` DESC),
+  KEY `posts_user_idx` (`user_id`,`created_at` DESC)
+) ENGINE=InnoDB AUTO_INCREMENT=15084 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+1 row in set (0.00 sec)
+
+mysql> show create table users\G
+*************************** 1. row ***************************
+       Table: users
+Create Table: CREATE TABLE `users` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `account_name` varchar(64) NOT NULL,
+  `passhash` varchar(128) NOT NULL,
+  `authority` tinyint(1) NOT NULL DEFAULT '0',
+  `del_flg` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `account_name` (`account_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=4999 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+1 row in set (0.00 sec)
+
+mysql> quit
+Bye
+[?2004h]0;ubuntu@ip-172-31-18-248: ~[01;32mubuntu@ip-172-31-18-248[00m:[01;34m~[00m$ exit
+[?2004lexit
+
+Script done on 2023-11-24 21:23:26+09:00 [COMMAND_EXIT_CODE="0"]
