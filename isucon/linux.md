@@ -21,6 +21,7 @@
 | MTUの一時変更 | sudo ip link set ens5 mtu 9000 | ems5はI/F名、9000はMTU値 |
 | カーネルパラメータの全確認 |   sudo sysctl -a  |  |
 | systemctl failedの詳細確認 |  journalctl -u isu-ruby  | isu-rubyはサービス名 |
+| ストレージ使用確認 |  du   |  |
 
 
 - topコマンドの確認点
