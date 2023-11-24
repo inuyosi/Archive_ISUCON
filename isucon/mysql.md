@@ -38,4 +38,5 @@
 | テーブルにあるユーザのコメント数を数える |   explan select count(*) from comments where user_id = 123; |  comments は対象テーブル |
 | 全文探索インデックスの作成 | alter table comments add fulltext index comments_full_idx (comment) with parser ngram; |  comments は対象テーブル |
 | 全文検索 |  select * from comments where match (comment) AGAINST ('データベース' IN BOOLEAN MODE); |  comments は対象テーブル |
+| テーブルの一覧 |  show tables; |  |
 
