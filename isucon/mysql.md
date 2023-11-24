@@ -2,11 +2,17 @@
  - mysqld.cnfの編集
   ```
   sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
-
   ...
-  slow_query_log          = 1
+  # Here you can see queries with especially long duration
+  slow_query_log          = 0
   slow_query_log_file     = /var/log/mysql/mysql-slow.log
   long_query_time = 0
+
+  # コミットごとに更新データをログに書き、1秒ごとにログをフラッシュ
+  innodb_flush_log_at_trx_commit = 2
+
+  # バイナリログを無効化する
+  disable-log-bin = 1
   ...
   ```
  - mysqlからの設定: 永続化はmy.cof or set presist を使用
