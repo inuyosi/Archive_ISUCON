@@ -67,6 +67,7 @@
   - nt.core.somaxconn: backlogの受け入れ数
    - net.ipv4.ip_local_port_range: 動的に確保するポートの範囲
     - 少ないとき: curl`Connot assign requested address`
+      - `/etc/securiy/limits.conf`の編集
     -  UNIX domain socket
  - mtuの変更 
 
