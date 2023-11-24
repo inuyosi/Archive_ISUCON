@@ -20,6 +20,8 @@
 | MTUの確認 | ip link show |  |
 | MTUの一時変更 | sudo ip link set ens5 mtu 9000 | ems5はI/F名、9000はMTU値 |
 | カーネルパラメータの全確認 |   sudo sysctl -a  |  |
+| systemctl failedの詳細確認 |  journalctl -u isu-ruby  | isu-rubyはサービス名 |
+
 
 - topコマンドの確認点
   - us: ユーザ空間におけるCPU利用率
