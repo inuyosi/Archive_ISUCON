@@ -18,8 +18,8 @@ sudo apt-get update
 sudo apt-get install k6　-y
 
 ## pt-query-digest
-#sudo apt update
-#sudo apt install percona-toolkit -y
+sudo apt update
+sudo apt install percona-toolkit -y
 
 ## query-digester
 git clone https://github.com/kazeburo/query-digester.git
